@@ -1,6 +1,7 @@
 require 'yaml'
 require 'singleton'
 require 'sequel'
+require 'rack'
 require_relative 'router'
 require_relative 'controller'
 
@@ -27,11 +28,15 @@ module Simpler
     end
 
     def call(env)
-      route = @router.route_for(env)
-      controller = route.controller.new(env)
-      action = route.action
-
-      make_response(controller, action)
+      begin
+        route = @router.route_for(env)
+        add_params(route, env)
+        controller = route.controller.new(env)
+        action = route.action
+        make_response(controller, action)
+      rescue StandardError => e
+        not_found(e)
+      end
     end
 
     private
@@ -54,5 +59,13 @@ module Simpler
       controller.make_response(action)
     end
 
+    def not_found(e)
+      [404, { 'content-type' => 'text/plain' }, ["Not Found: #{e.message}"]]
+    end
+
+    def add_params(route, env)
+      route.add_params(env['PATH_INFO'])
+      env['simpler.route_params'] = route.params
+    end
   end
 end

@@ -19,7 +19,15 @@ module Simpler
       method = env['REQUEST_METHOD'].downcase.to_sym
       path = env['PATH_INFO']
 
+      puts path
+
       @routes.find { |route| route.match?(method, path) }
+
+      route = @routes.find { |route| route.match?(method, path) }
+
+      raise StandardError, "No route matches #{method.upcase} '#{path}'" if route.nil?
+
+      route
     end
 
     private

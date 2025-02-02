@@ -1,0 +1,21 @@
+# Logfile created on 2025-02-02 18:59:27 +0300 by logger.rb/v1.6.4
+I, [2025-02-02T18:59:31.717592 #29753]  INFO -- : Request: GET /
+Handler: No Controller#UNKNOWN
+Parameters: {}
+Response: 404 Not Found [text/plain]
+I, [2025-02-02T18:59:35.814585 #29753]  INFO -- : Request: GET /tests/
+Handler: TestsController#index
+Parameters: {}
+Response: 200 OK [text/html] tests/index.html.erb
+I, [2025-02-02T18:59:36.579479 #29753]  INFO -- : Request: GET /tests/
+Handler: TestsController#index
+Parameters: {}
+Response: 200 OK [text/html] tests/index.html.erb
+I, [2025-02-02T18:59:36.994588 #29753]  INFO -- : Request: GET /tests/
+Handler: TestsController#index
+Parameters: {}
+Response: 200 OK [text/html] tests/index.html.erb
+I, [2025-02-02T18:59:39.865198 #29753]  INFO -- : Request: GET /tests/1
+Handler: TestsController#show
+Parameters: {}
+Response: 200 OK [text/html] tests/show.html.erb
